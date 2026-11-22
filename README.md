@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stock App
+
+A modern web application built with **Next.js**, **Tailwind CSS**, and **Hugeicons**.
+
+---
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, React 19, TypeScript)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Hugeicons React](https://hugeicons.com/) (`@hugeicons/react` + `@hugeicons/core-free-icons`)
+- **Package Manager**: [pnpm](https://pnpm.io/)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+1. Navigate to the project directory:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd stock
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Hugeicons Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Import the `HugeiconsIcon` component and any desired icons from `@hugeicons/core-free-icons`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Rocket01Icon, SparklesIcon } from "@hugeicons/core-free-icons";
 
-## Deploy on Vercel
+export default function MyComponent() {
+  return (
+    <div className="flex items-center gap-3">
+      {/* Standard Icon */}
+      <HugeiconsIcon icon={Rocket01Icon} size={24} className="text-blue-500" />
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+      {/* Customized Icon */}
+      <HugeiconsIcon
+        icon={SparklesIcon}
+        size={28}
+        strokeWidth={2}
+        className="text-amber-500"
+      />
+    </div>
+  );
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Available Scripts
+
+- `pnpm dev`: Starts the Next.js development server.
+- `pnpm build`: Builds the production bundle.
+- `pnpm start`: Starts the Next.js production server.
+- `pnpm lint`: Runs ESLint to check for code quality issues.
