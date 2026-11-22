@@ -29,7 +29,7 @@ export const navigationConfig: {
     company: [
       { title: "About Md Asad Ansari", href: "/about" },
       { title: "All Services", href: "/services" },
-      { title: "Office Locations", href: "/contact" },
+      { title: "Office Locations", href: "/contact#locations" },
       { title: "Book a Consultation", href: "/contact" },
     ],
     legal: [

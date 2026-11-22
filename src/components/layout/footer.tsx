@@ -34,7 +34,7 @@ export function Footer() {
             </span>
             <ul className="space-y-2">
               {navigationConfig.footerNav.services.map((item) => (
-                <li key={item.href}>
+                <li key={`${item.href}-${item.title}`}>
                   <Link
                     href={item.href}
                     className="hover:text-white transition-colors"
@@ -53,7 +53,7 @@ export function Footer() {
             </span>
             <ul className="space-y-2">
               {navigationConfig.footerNav.company.map((item) => (
-                <li key={item.href}>
+                <li key={`${item.href}-${item.title}`}>
                   <Link
                     href={item.href}
                     className="hover:text-white transition-colors"
@@ -104,7 +104,7 @@ export function Footer() {
           <div className="flex gap-6">
             {navigationConfig.footerNav.legal.map((item) => (
               <Link
-                key={item.href}
+                key={`${item.href}-${item.title}`}
                 href={item.href}
                 className="hover:text-white transition-colors"
               >
