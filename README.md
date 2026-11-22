@@ -1,6 +1,6 @@
-# Stock App
+# asad-accounting
 
-A modern web application built with **Next.js**, **Tailwind CSS**, and **Hugeicons**.
+ASAD Accounting & Tax Solution — A modern web application built with **Next.js**, **Tailwind CSS**, and **Hugeicons**.
 
 ---
 
