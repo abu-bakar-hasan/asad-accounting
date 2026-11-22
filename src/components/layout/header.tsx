@@ -1,177 +1,113 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HugeiconsIcon } from "@hugeicons/react";
-import {
-  Call02Icon,
-  Menu01Icon,
-  Cancel01Icon,
-  WhatsappIcon,
-} from "@hugeicons/core-free-icons";
+import { Call02Icon, Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { business } from "@/config/business";
-import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { AsadLogo } from "./logo";
 import { Container } from "./container";
+import styles from "./header.module.css";
+
+const navLinks = [
+  { title: "Home", href: "/" },
+  { title: "Services", href: "/services" },
+  { title: "About", href: "/about" },
+  { title: "Contact", href: "/contact" },
+];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const header = useRef<HTMLElement>(null);
+  const toggle = useRef<HTMLButtonElement>(null);
+  const menu = useRef<HTMLElement>(null);
 
-  // Prevent background scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    menu.current?.querySelector<HTMLAnchorElement>("a")?.focus();
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => { if (desktop.matches) setMobileMenuOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        toggle.current?.focus();
+      }
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(header.current?.querySelectorAll<HTMLElement>("a[href], button") ?? []).filter(element => element.getClientRects().length > 0);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener("change", closeOnDesktop);
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { title: "Home", href: "/" },
-    { title: "Services", href: "/services" },
-    { title: "About", href: "/about" },
-    { title: "Contact", href: "/contact" },
-  ];
+  const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border/80 transition-colors">
-      <Container className="h-20 flex items-center justify-between gap-4">
-        {/* Left: Brand Identity */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
+    <header
+      ref={header}
+      role={mobileMenuOpen ? "dialog" : undefined}
+      aria-modal={mobileMenuOpen ? true : undefined}
+      aria-label={mobileMenuOpen ? "Site navigation" : undefined}
+      className={`pointer-events-none sticky top-0 z-50 flex h-20 items-center sm:h-[88px] lg:block lg:h-auto lg:py-5 ${mobileMenuOpen ? "bg-background" : ""}`}
+    >
+      <Container className="relative flex w-full items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
+        <Link href="/" onClick={() => setMobileMenuOpen(false)} className="pointer-events-auto flex w-fit items-center gap-2 sm:gap-3 group shrink-0 rounded-full bg-background/90 py-1 pr-3 backdrop-blur-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800">
           <AsadLogo className="w-10 h-10 transition-transform group-hover:scale-105" />
           <div>
-            <span className="text-xl font-bold tracking-tight text-foreground block leading-tight">
-              ASAD
-            </span>
-            <span className="text-xs text-muted font-medium block tracking-wide">
-              Accounting & Tax Solution
-            </span>
+            <span className="text-xl font-bold tracking-tight text-foreground block leading-tight">ASAD</span>
+            <span className="hidden lg:block text-xs text-muted font-medium tracking-wide">Accounting & Tax Solution</span>
           </div>
         </Link>
 
-        {/* Center: Clean Navigation Links with Active State */}
-        <nav
-          aria-label="Main Navigation"
-          className="hidden md:flex items-center gap-8 text-sm font-medium"
-        >
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname?.startsWith(link.href);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative py-1 transition-colors ${
-                  isActive
-                    ? "text-brand-900 font-semibold"
-                    : "text-foreground hover:text-brand-900"
-                }`}
-              >
-                <span>{link.title}</span>
-                {isActive && (
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-800 rounded-full"
-                    aria-hidden="true"
-                  />
-                )}
-              </Link>
-            );
-          })}
+        <nav aria-label="Main navigation" className="pointer-events-auto hidden lg:flex items-center gap-1 rounded-full border border-border bg-surface/95 p-1.5 text-sm font-medium shadow-[0_4px_20px_rgba(16,45,32,0.04)] backdrop-blur-xl">
+          {navLinks.map(link => (
+            <Link key={link.href} href={link.href} aria-current={isActive(link.href) ? "page" : undefined} className={`rounded-full px-5 py-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-800 ${isActive(link.href) ? "bg-sage-100 text-brand-900 font-semibold" : "text-muted hover:bg-sage-50 hover:text-brand-900"}`}>
+              {link.title}
+            </Link>
+          ))}
         </nav>
 
-        {/* Right: Phone CTA Button (matching reference image) */}
-        <div className="flex items-center gap-3 shrink-0">
-          <a
-            href={`tel:${business.phone}`}
-            className="bg-brand-950 hover:bg-brand-900 text-white font-medium px-5 py-2.5 rounded-full inline-flex items-center gap-2 text-sm shadow-sm transition-colors group"
-            title="Call ASAD Accounting"
-          >
-            <HugeiconsIcon
-              icon={Call02Icon}
-              size={16}
-              className="group-hover:scale-110 transition-transform"
-            />
+        <div className="pointer-events-auto flex items-center justify-self-end shrink-0">
+          <a href={`tel:${business.phone}`} className="hidden lg:inline-flex bg-brand-950 hover:bg-brand-900 text-white font-medium h-11 px-5 rounded-full items-center justify-center gap-2 text-sm shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800" aria-label={`Call ASAD Accounting at ${business.displayPhone}`}>
+            <HugeiconsIcon icon={Call02Icon} size={16} />
             <span>{business.displayPhone}</span>
           </a>
-
-          {/* Mobile Menu Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-surface-muted transition-colors cursor-pointer"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            suppressHydrationWarning
-          >
-            <HugeiconsIcon
-              icon={mobileMenuOpen ? Cancel01Icon : Menu01Icon}
-              size={20}
-            />
+          <button ref={toggle} type="button" onClick={() => setMobileMenuOpen(open => !open)} className="lg:hidden w-11 h-11 flex items-center justify-center text-foreground cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800" aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={mobileMenuOpen} aria-controls="mobile-navigation">
+            <HugeiconsIcon icon={mobileMenuOpen ? Cancel01Icon : Menu01Icon} size={26} />
           </button>
         </div>
       </Container>
 
-      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-surface px-4 py-6 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="max-w-md mx-auto space-y-5">
-            <div className="space-y-1">
-              {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname?.startsWith(link.href);
-
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors ${
-                      isActive
-                        ? "bg-sage-100 text-brand-900"
-                        : "text-foreground hover:bg-sage-50"
-                    }`}
-                  >
+        <nav ref={menu} id="mobile-navigation" aria-label="Mobile and tablet navigation" className={`${styles.panel} pointer-events-auto fixed inset-x-0 top-20 h-[calc(100dvh-80px)] sm:top-[88px] sm:h-[calc(100dvh-88px)] lg:hidden overflow-y-auto overscroll-contain bg-background pb-[max(2rem,env(safe-area-inset-bottom))]`}>
+          <Container className="flex min-h-full flex-col justify-center py-10 sm:py-14">
+            <ul className="flex flex-col gap-5 sm:gap-7">
+              {navLinks.map((link, index) => (
+                <li key={link.href} className={styles.item} style={{ "--link-index": index } as CSSProperties}>
+                  <Link href={link.href} onClick={() => setMobileMenuOpen(false)} aria-current={isActive(link.href) ? "page" : undefined} className={`inline-block py-2 text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.15] font-semibold tracking-tight transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-800 ${isActive(link.href) ? "text-brand-700" : "text-foreground hover:text-brand-700"}`}>
                     {link.title}
                   </Link>
-                );
-              })}
-            </div>
-
-            {/* Direct Contact Buttons */}
-            <div className="pt-4 border-t border-border space-y-2.5">
-              <a
-                href={`tel:${business.phone}`}
-                className="w-full bg-brand-950 text-white font-medium py-3 rounded-xl transition-colors text-center flex items-center justify-center gap-2 text-sm"
-              >
-                <HugeiconsIcon icon={Call02Icon} size={16} />
-                <span>Call {business.displayPhone}</span>
-              </a>
-
-              <a
-                href={getWhatsAppUrl(business.phone)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full border border-border text-foreground font-medium py-3 rounded-xl transition-colors text-center flex items-center justify-center gap-2 text-sm hover:bg-surface-muted"
-              >
-                <HugeiconsIcon
-                  icon={WhatsappIcon}
-                  size={16}
-                  className="text-[#25D366]"
-                />
-                <span>Chat on WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </div>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </nav>
       )}
     </header>
   );

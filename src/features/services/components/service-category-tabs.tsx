@@ -7,7 +7,7 @@ interface ServiceCategoryTabsProps {
   categories: ServiceCategory[];
   activeCategory: string;
   onSelectCategory: (id: string) => void;
-  totalServicesCount: number;
+  totalServicesCount?: number;
 }
 
 export function ServiceCategoryTabs({
@@ -23,14 +23,15 @@ export function ServiceCategoryTabs({
         <button
           type="button"
           onClick={() => onSelectCategory("all")}
+          aria-pressed={activeCategory === "all"}
           suppressHydrationWarning
-          className={`relative py-3 sm:py-3.5 text-sm sm:text-base whitespace-nowrap transition-colors cursor-pointer focus-visible:outline-none ${
+          className={`relative py-3 sm:py-3.5 text-sm sm:text-base whitespace-nowrap transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-brand-800 focus-visible:-outline-offset-4 ${
             activeCategory === "all"
               ? "text-brand-900 font-semibold"
               : "text-muted hover:text-foreground font-medium"
           }`}
         >
-          <span>All Services ({totalServicesCount})</span>
+          <span>All Services{totalServicesCount !== undefined ? ` (${totalServicesCount})` : ""}</span>
           {activeCategory === "all" && (
             <span
               className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-brand-900 rounded-full"
@@ -48,8 +49,9 @@ export function ServiceCategoryTabs({
               key={cat.id}
               type="button"
               onClick={() => onSelectCategory(cat.id)}
+              aria-pressed={isActive}
               suppressHydrationWarning
-              className={`relative py-3 sm:py-3.5 text-sm sm:text-base whitespace-nowrap transition-colors cursor-pointer focus-visible:outline-none ${
+              className={`relative py-3 sm:py-3.5 text-sm sm:text-base whitespace-nowrap transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-brand-800 focus-visible:-outline-offset-4 ${
                 isActive
                   ? "text-brand-900 font-semibold"
                   : "text-muted hover:text-foreground font-medium"

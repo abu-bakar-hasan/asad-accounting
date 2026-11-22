@@ -14,11 +14,13 @@ export function ServicesSection() {
   const categories = getAllCategories();
 
   return (
-    <section id="services" className="py-20 lg:py-28 bg-background border-t border-border">
-      <Container className="space-y-10 sm:space-y-12">
+    <section id="services" className="relative overflow-hidden py-20 lg:py-28 bg-background">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-48 -top-64 h-96 w-[700px] rounded-[50%] bg-sage-100/60 rotate-12" />
+      <Container className="relative space-y-10 sm:space-y-12">
         {/* Section Introduction */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
+            <div aria-hidden="true" className="mb-4 h-1 w-12 rounded-full bg-brand-800" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.12]">
               Explore Our Services
             </h2>

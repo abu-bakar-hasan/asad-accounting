@@ -1,68 +1,46 @@
-import React from "react";
+"use client";
+
+import { useId } from "react";
+import { sampledGrowth, useChartTime } from "./use-chart-time";
 
 export function GstGraph() {
+  const { container, time } = useChartTime();
+  const id = useId();
+  const duration = 24;
+  const left = 18;
+  const right = 296;
+  const bottom = 161;
+  const step = 2;
+  const head = sampledGrowth(time);
+  const y = (sample: number) => 29 + head - sampledGrowth(sample);
+  const x = (sample: number) => right - (time - sample) / duration * (right - left);
+  const first = Math.floor((time - duration) / step);
+  const last = Math.floor(time / step);
+  const points = Array.from({ length: last - first + 1 }, (_, index) => {
+    const sample = (first + index) * step;
+    return { x: x(sample), y: y(sample) };
+  });
+  points.push({ x: right, y: 29 });
+  const line = points.map((point, index) => `${index ? "L" : "M"}${point.x.toFixed(3)} ${point.y.toFixed(3)}`).join(" ");
+
   return (
-    <div className="w-full pt-2 overflow-hidden select-none pointer-events-none">
-      <svg
-        viewBox="0 0 320 180"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto overflow-visible"
-        aria-hidden="true"
-      >
+    <div ref={container} className="w-full pt-2 overflow-hidden select-none pointer-events-none">
+      <svg viewBox="0 0 320 180" fill="none" className="w-full h-auto" aria-hidden="true">
         <defs>
-          {/* Subtle area gradient */}
-          <linearGradient id="gst-card-area" x1="160" y1="20" x2="160" y2="175" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A5BCA5" stopOpacity="0.35" />
-            <stop offset="50%" stopColor="#829A86" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#102D20" stopOpacity="0.0" />
+          <linearGradient id={`${id}-area`} x1="0" y1="25" x2="0" y2="161" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#C5D9C2" stopOpacity=".65" /><stop offset="1" stopColor="#C5D9C2" stopOpacity="0" />
           </linearGradient>
-
-          {/* Line stroke gradient */}
-          <linearGradient id="gst-card-line" x1="15" y1="140" x2="295" y2="25" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#829A86" />
-            <stop offset="45%" stopColor="#C5D9C2" />
-            <stop offset="100%" stopColor="#FFFFFF" />
-          </linearGradient>
-
-          {/* Vertical Bar gradient */}
-          <linearGradient id="gst-card-bar" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#DCE9D8" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.04" />
-          </linearGradient>
+          <clipPath id={`${id}-clip`}><rect x={left} y="12" width={right-left+1} height={bottom-12} /></clipPath>
         </defs>
-
-        {/* Subtle grid guidelines */}
-        <line x1="15" y1="165" x2="305" y2="165" stroke="#FFFFFF" strokeOpacity="0.1" strokeWidth="1" strokeDasharray="3 3" />
-        <line x1="15" y1="110" x2="305" y2="110" stroke="#FFFFFF" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="3 3" />
-
-        {/* 6 Translucent ascending vertical bars */}
-        <rect x="25" y="130" width="22" height="35" rx="6" fill="url(#gst-card-bar)" />
-        <rect x="75" y="112" width="22" height="53" rx="6" fill="url(#gst-card-bar)" />
-        <rect x="125" y="94" width="22" height="71" rx="6" fill="url(#gst-card-bar)" />
-        <rect x="175" y="74" width="22" height="91" rx="6" fill="url(#gst-card-bar)" />
-        <rect x="225" y="52" width="22" height="113" rx="6" fill="url(#gst-card-bar)" />
-        <rect x="275" y="28" width="22" height="137" rx="6" fill="url(#gst-card-bar)" />
-
-        {/* Area fill polygon beneath the curve */}
-        <path
-          d="M 15 165 L 15 142 C 65 140, 115 125, 160 100 C 205 75, 245 52, 286 28 L 286 165 Z"
-          fill="url(#gst-card-area)"
-        />
-
-        {/* Ascending financial line curve */}
-        <path
-          d="M 15 142 C 65 140, 115 125, 160 100 C 205 75, 245 52, 286 28"
-          stroke="url(#gst-card-line)"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-
-        {/* Peak glowing data marker with bright white halo */}
-        <circle cx="286" cy="28" r="14" fill="#FFFFFF" fillOpacity="0.2" className="animate-pulse" />
-        <circle cx="286" cy="28" r="7" fill="#DCE9D8" fillOpacity="0.6" />
-        <circle cx="286" cy="28" r="3.5" fill="#FFFFFF" />
+        {[41,81,121,161].map(level => <line key={level} x1={left} x2={right} y1={level} y2={level} stroke="white" strokeOpacity=".09" />)}
+        <g clipPath={`url(#${id}-clip)`}>
+          <path d={`${line} L${right} ${bottom} L${points[0].x} ${bottom}Z`} fill={`url(#${id}-area)`} />
+          <path d={line} stroke="#DCE9D8" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+          {points.slice(0, -1).map((point, index) => <circle key={first+index} cx={point.x} cy={point.y} r="2.5" fill="#DCE9D8" stroke="#17452D" strokeWidth="1" />)}
+        </g>
+        <line x1={right} x2={right} y1="29" y2={bottom} stroke="#DCE9D8" strokeOpacity=".2" strokeDasharray="3 4" />
+        <circle cx={right} cy="29" r="8" fill="#DCE9D8" fillOpacity=".13" />
+        <circle cx={right} cy="29" r="3.5" fill="white" />
       </svg>
     </div>
   );

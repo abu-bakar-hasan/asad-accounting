@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { GstGraph } from "./graphics/gst-graph";
 import { TaxDonut } from "./graphics/tax-donut";
-import { AccountingBars } from "./graphics/accounting-bars";
+import { AccountingLedger } from "./graphics/accounting-ledger";
 import { RegistrationShapes } from "./graphics/registration-shapes";
 import { TenderDocument } from "./graphics/tender-document";
 
@@ -68,7 +68,7 @@ export function ServiceCanvas() {
           <br />
           Bookkeeping
         </h3>
-        <AccountingBars />
+        <AccountingLedger />
       </Link>
 
       {/* Card 5: Tender Filing & DSC (Row 2, Col 3 on Desktop) */}
@@ -86,3 +86,4 @@ export function ServiceCanvas() {
     </div>
   );
 }
+

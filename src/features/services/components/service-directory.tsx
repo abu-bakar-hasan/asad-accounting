@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import type { Service, ServiceCategory } from "../types/service";
 import { ServiceCategoryTabs } from "./service-category-tabs";
-import { ServiceRow } from "./service-row";
-import { FeaturedServiceRow } from "./featured-service-row";
+import { ExpandingServiceRow } from "./expanding-service-row";
+
+const highlights = ["gst-registration", "itr-filing", "accounting-bookkeeping", "company-incorporation", "tender-filing"];
 
 interface ServiceDirectoryProps {
   services: Service[];
@@ -16,14 +17,14 @@ export function ServiceDirectory({
   categories,
 }: ServiceDirectoryProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
   const filteredServices =
     activeCategory === "all"
-      ? services
+      ? highlights.flatMap((slug) => services.filter((service) => service.slug === slug))
       : services.filter((s) => s.category === activeCategory);
 
-  // The first visible service with `featured: true` receives the featured row treatment
-  const featuredIndex = filteredServices.findIndex((s) => s.featured);
+  const activeSlug = expandedSlug ?? filteredServices[0]?.slug;
 
   return (
     <div className="space-y-8 sm:space-y-10">
@@ -31,21 +32,26 @@ export function ServiceDirectory({
       <ServiceCategoryTabs
         categories={categories}
         activeCategory={activeCategory}
-        onSelectCategory={setActiveCategory}
-        totalServicesCount={services.length}
+        onSelectCategory={(category) => {
+          setActiveCategory(category);
+          setExpandedSlug(null);
+        }}
       />
 
       {/* Directory of Horizontal Service Rows */}
       {filteredServices.length > 0 ? (
-        <div className="space-y-3.5 sm:space-y-4">
-          {filteredServices.map((service, index) => {
-            if (index === featuredIndex) {
-              return (
-                <FeaturedServiceRow key={service.slug} service={service} />
-              );
-            }
-            return <ServiceRow key={service.slug} service={service} />;
-          })}
+        <div>
+          {filteredServices.map((service, index) => (
+            <ExpandingServiceRow
+              key={service.slug}
+              service={service}
+              index={index}
+              expanded={activeSlug === service.slug}
+              onExpand={() => setExpandedSlug(service.slug)}
+              onCollapse={() => setExpandedSlug((current) => current === service.slug ? null : current)}
+              onToggle={() => setExpandedSlug(activeSlug === service.slug ? null : service.slug)}
+            />
+          ))}
         </div>
       ) : (
         /* Empty State */
