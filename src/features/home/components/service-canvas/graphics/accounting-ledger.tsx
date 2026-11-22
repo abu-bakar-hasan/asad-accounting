@@ -7,7 +7,7 @@ export function AccountingLedger() {
   const id = useId();
   return (
     <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 select-none pointer-events-none">
-      <svg viewBox="0 0 140 130" fill="none" className="w-full h-full" aria-hidden="true">
+      <svg viewBox="0 0 140 130" fill="none" className={`${styles.float} w-full h-full`} aria-hidden="true">
         <defs><linearGradient id={`${id}-paper`} x1="24" y1="36" x2="110" y2="116" gradientUnits="userSpaceOnUse"><stop stopColor="#fff" /><stop offset="1" stopColor="#EDF4E9" /></linearGradient></defs>
         <ellipse cx="72" cy="116" rx="56" ry="7" fill="#17452D" fillOpacity=".06" />
         <g transform="rotate(9 98 40)">
@@ -26,3 +26,4 @@ export function AccountingLedger() {
     </div>
   );
 }
+

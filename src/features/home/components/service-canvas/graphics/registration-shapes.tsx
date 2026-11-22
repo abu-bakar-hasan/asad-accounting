@@ -7,7 +7,7 @@ export function RegistrationShapes() {
   const id = useId();
   return (
     <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 select-none pointer-events-none">
-      <svg viewBox="0 0 140 130" fill="none" className="w-full h-full" aria-hidden="true">
+      <svg viewBox="0 0 140 130" fill="none" className={`${styles.float} w-full h-full`} aria-hidden="true">
         <defs><linearGradient id={`${id}-paper`} x1="25" y1="42" x2="99" y2="119" gradientUnits="userSpaceOnUse"><stop stopColor="#fff" /><stop offset="1" stopColor="#EDF4E9" /></linearGradient></defs>
         <ellipse cx="74" cy="117" rx="53" ry="6" fill="#17452D" fillOpacity=".06" />
         <path d="m78 24 27-12 24 13-28 12Z" fill="#C5D9C2" /><path d="m78 24 23 13v62L78 86Z" fill="#829A86" /><path d="m101 37 28-12v62l-28 12Z" fill="#287A45" />
@@ -28,3 +28,4 @@ export function RegistrationShapes() {
     </div>
   );
 }
+

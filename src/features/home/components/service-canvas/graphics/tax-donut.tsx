@@ -1,4 +1,4 @@
-import React from "react";
+import styles from "./service-objects.module.css";
 
 export function TaxDonut() {
   return (
@@ -7,7 +7,7 @@ export function TaxDonut() {
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full transform -rotate-90 transition-transform duration-500 ease-out group-hover:rotate-[-70deg] group-hover:scale-105"
+        className={`${styles.donut} w-full h-full`}
         aria-hidden="true"
       >
         {/* Base hollow background ring */}
@@ -50,3 +50,4 @@ export function TaxDonut() {
     </div>
   );
 }
+

@@ -7,7 +7,7 @@ export function TenderDocument() {
   const id = useId();
   return (
     <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 select-none pointer-events-none">
-      <svg viewBox="0 0 140 130" fill="none" className="w-full h-full" aria-hidden="true">
+      <svg viewBox="0 0 140 130" fill="none" className={`${styles.float} w-full h-full`} aria-hidden="true">
         <defs><linearGradient id={`${id}-paper`} x1="26" y1="20" x2="100" y2="110" gradientUnits="userSpaceOnUse"><stop stopColor="#fff" /><stop offset="1" stopColor="#EDF4E9" /></linearGradient><linearGradient id={`${id}-token`} x1="94" y1="70" x2="116" y2="114" gradientUnits="userSpaceOnUse"><stop stopColor="#39945A" /><stop offset="1" stopColor="#17452D" /></linearGradient></defs>
         <ellipse cx="75" cy="118" rx="51" ry="6" fill="#17452D" fillOpacity=".06" />
         <rect x="23" y="19" width="68" height="91" rx="6" fill="#DCE9D8" transform="rotate(-8 57 64)" />
@@ -26,3 +26,4 @@ export function TenderDocument() {
     </div>
   );
 }
+

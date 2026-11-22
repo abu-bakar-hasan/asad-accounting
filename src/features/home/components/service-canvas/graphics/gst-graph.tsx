@@ -10,9 +10,9 @@ export function GstGraph() {
   const left = 18;
   const right = 296;
   const bottom = 161;
-  const step = 2;
-  const head = sampledGrowth(time);
-  const y = (sample: number) => 29 + head - sampledGrowth(sample);
+  const step = 1;
+  const head = time * 3.5;
+  const y = (sample: number) => 45 + head - sampledGrowth(sample);
   const x = (sample: number) => right - (time - sample) / duration * (right - left);
   const first = Math.floor((time - duration) / step);
   const last = Math.floor(time / step);
@@ -20,7 +20,8 @@ export function GstGraph() {
     const sample = (first + index) * step;
     return { x: x(sample), y: y(sample) };
   });
-  points.push({ x: right, y: 29 });
+  const tipY = y(time);
+  points.push({ x: right, y: tipY });
   const line = points.map((point, index) => `${index ? "L" : "M"}${point.x.toFixed(3)} ${point.y.toFixed(3)}`).join(" ");
 
   return (
@@ -38,10 +39,11 @@ export function GstGraph() {
           <path d={line} stroke="#DCE9D8" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
           {points.slice(0, -1).map((point, index) => <circle key={first+index} cx={point.x} cy={point.y} r="2.5" fill="#DCE9D8" stroke="#17452D" strokeWidth="1" />)}
         </g>
-        <line x1={right} x2={right} y1="29" y2={bottom} stroke="#DCE9D8" strokeOpacity=".2" strokeDasharray="3 4" />
-        <circle cx={right} cy="29" r="8" fill="#DCE9D8" fillOpacity=".13" />
-        <circle cx={right} cy="29" r="3.5" fill="white" />
+        <line x1={right} x2={right} y1={tipY} y2={bottom} stroke="#DCE9D8" strokeOpacity=".2" strokeDasharray="3 4" />
+        <circle cx={right} cy={tipY} r="8" fill="#DCE9D8" fillOpacity=".13" />
+        <circle cx={right} cy={tipY} r="3.5" fill="white" />
       </svg>
     </div>
   );
 }
+

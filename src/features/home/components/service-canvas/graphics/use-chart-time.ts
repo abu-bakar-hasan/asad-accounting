@@ -40,13 +40,14 @@ export function useChartTime() {
   return { container, time };
 }
 
-// Positive slope at every instant; the camera follows the latest value.
+// An upward trend with visible rises and dips; the camera follows the trend.
 export function chartGrowth(time: number) {
-  return time * 5 + Math.sin(time * .63) * 3 + Math.sin(time * 1.17) * 1.2;
+  return time * 3.5 + Math.sin(time * .74) * 15 + Math.sin(time * 1.63) * 7;
 }
 
-export function sampledGrowth(time: number, step = 2) {
+export function sampledGrowth(time: number, step = 1) {
   const start = Math.floor(time / step) * step;
   const progress = (time - start) / step;
   return chartGrowth(start) * (1 - progress) + chartGrowth(start + step) * progress;
 }
+
