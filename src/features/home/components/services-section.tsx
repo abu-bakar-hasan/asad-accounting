@@ -1,33 +1,49 @@
+import React from "react";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { Container } from "@/components/layout/container";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { ServiceGrid } from "@/features/services/components/service-grid";
-import { getAllServices, getAllCategories } from "@/features/services/utils/get-service";
+import { ServiceDirectory } from "@/features/services/components/service-directory";
+import {
+  getAllServices,
+  getAllCategories,
+} from "@/features/services/utils/get-service";
 
 export function ServicesSection() {
   const services = getAllServices();
   const categories = getAllCategories();
 
   return (
-    <section id="services" className="py-20 bg-background border-t border-border">
-      <Container className="space-y-12">
+    <section id="services" className="py-20 lg:py-28 bg-background border-t border-border">
+      <Container className="space-y-10 sm:space-y-12">
+        {/* Section Introduction */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <SectionHeading
-            title="Specialized Services for Every Business Stage"
-            description="Structured solutions designed to keep your business legally secure, tax-optimized, and audit-ready."
-          />
+          <div className="max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.12]">
+              Explore Our Services
+            </h2>
+            <p className="text-base sm:text-lg text-muted mt-2.5 sm:mt-3 leading-relaxed max-w-[650px]">
+              From everyday tax filings to complex business registrations, find
+              the support you need.
+            </p>
+          </div>
+
+          {/* Browse All Services Link */}
           <Link
             href="/services"
-            className="text-xs font-semibold text-brand-900 hover:text-brand-800 flex items-center gap-1.5 shrink-0"
+            className="group inline-flex items-center gap-1.5 text-brand-900 hover:text-brand-800 font-semibold text-sm sm:text-base transition-colors shrink-0 self-start md:self-end"
           >
-            <span>Browse Full Catalog</span>
-            <HugeiconsIcon icon={ArrowRight01Icon} size={14} />
+            <span>Browse All Services</span>
+            <HugeiconsIcon
+              icon={ArrowUpRight01Icon}
+              size={18}
+              className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+            />
           </Link>
         </div>
 
-        <ServiceGrid services={services} categories={categories} />
+        {/* Editorial Service Directory with Tabs & Rows */}
+        <ServiceDirectory services={services} categories={categories} />
       </Container>
     </section>
   );
