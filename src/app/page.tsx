@@ -29,17 +29,14 @@ function AsadLogo({ className = "w-9 h-9" }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      {/* Left green leg */}
       <path
         d="M20 4L7 34H14.5L20 20.5L25.5 34H33L20 4Z"
         fill="#17452D"
       />
-      {/* Accent inner fold */}
       <path
         d="M20 11L14 25.5H26L20 11Z"
         fill="#287A45"
       />
-      {/* Lower geometric crossbar accent */}
       <circle cx="20" cy="28.5" r="3" fill="#829A86" />
     </svg>
   );
@@ -68,7 +65,6 @@ export default function Home() {
         "Professional Tax Assessment & Filing",
         "New PAN & TAN Applications",
       ],
-      badge: "Core Service",
     },
     {
       id: "accounting",
@@ -84,7 +80,6 @@ export default function Home() {
         "Project Reports & CMA Data for Bank Financing",
         "Reconciliations & Cash Flow Statements",
       ],
-      badge: "Financial Health",
     },
     {
       id: "registration",
@@ -100,7 +95,6 @@ export default function Home() {
         "NGO / Society / Trust Formation",
         "12A, 80G & NITI Aayog (Darpan) Registration",
       ],
-      badge: "Startup Ready",
     },
     {
       id: "licenses",
@@ -116,7 +110,6 @@ export default function Home() {
         "Trademark & Brand Name Filing",
         "Government Contractor License Assistance",
       ],
-      badge: "Authorizations",
     },
     {
       id: "legal",
@@ -132,7 +125,6 @@ export default function Home() {
         "Annual Statutory Filings with ROC & Regulators",
         "Notice Handling & Clarification Drafting",
       ],
-      badge: "Governance",
     },
     {
       id: "tender",
@@ -148,7 +140,6 @@ export default function Home() {
         "Vendor Registration on Portals",
         "Custom Compliance Documentation",
       ],
-      badge: "Government Portals",
     },
   ];
 
@@ -160,42 +151,42 @@ export default function Home() {
   // Compliance timelines based on entity type
   const entityDeadlines: Record<
     string,
-    { title: string; filings: { name: string; due: string; status: string }[] }
+    { title: string; filings: { name: string; due: string }[] }
   > = {
     proprietorship: {
       title: "Sole Proprietorship / Small Traders",
       filings: [
-        { name: "GSTR-1 (Outward Supplies)", due: "11th of every month", status: "Recurring" },
-        { name: "GSTR-3B (Summary Return & Tax)", due: "20th of every month", status: "Critical" },
-        { name: "Income Tax Return (ITR-3/4)", due: "31st July annually", status: "Annual" },
-        { name: "Quarterly Advance Tax", due: "15th Jun / Sep / Dec / Mar", status: "Quarterly" },
+        { name: "GSTR-1 (Outward Supplies)", due: "11th of every month" },
+        { name: "GSTR-3B (Summary Return & Tax)", due: "20th of every month" },
+        { name: "Income Tax Return (ITR-3/4)", due: "31st July annually" },
+        { name: "Quarterly Advance Tax", due: "15th Jun / Sep / Dec / Mar" },
       ],
     },
     partnership: {
       title: "Partnership Firm / LLP",
       filings: [
-        { name: "Monthly / Quarterly GST Filing", due: "11th & 20th monthly", status: "Recurring" },
-        { name: "LLP Form 11 (Annual Return)", due: "30th May annually", status: "Statutory" },
-        { name: "LLP Form 8 (Statement of Accounts)", due: "30th October", status: "Statutory" },
-        { name: "ITR-5 Tax Filing", due: "31st July (or 31st Oct if audited)", status: "Annual" },
+        { name: "Monthly / Quarterly GST Filing", due: "11th & 20th monthly" },
+        { name: "LLP Form 11 (Annual Return)", due: "30th May annually" },
+        { name: "LLP Form 8 (Statement of Accounts)", due: "30th October" },
+        { name: "ITR-5 Tax Filing", due: "31st July (or 31st Oct if audited)" },
       ],
     },
     pvtltd: {
       title: "Private Limited Company",
       filings: [
-        { name: "Monthly GSTR-1 & GSTR-3B", due: "Monthly cycle", status: "Recurring" },
-        { name: "AOC-4 (Financial Statements)", due: "Within 30 days of AGM", status: "Mandatory" },
-        { name: "MGT-7 (Annual Return)", due: "Within 60 days of AGM", status: "Mandatory" },
-        { name: "ITR-6 Corporate Tax Return", due: "31st October annually", status: "Critical" },
+        { name: "Monthly GSTR-1 & GSTR-3B", due: "Monthly cycle" },
+        { name: "AOC-4 (Financial Statements)", due: "Within 30 days of AGM" },
+        { name: "MGT-7 (Annual Return)", due: "Within 60 days of AGM" },
+        { name: "ITR-6 Corporate Tax Return", due: "31st October annually" },
       ],
     },
     ngo: {
       title: "NGO / Trust / Society",
       filings: [
-        { name: "ITR-7 (Exempt Entities)", due: "31st October annually", status: "Mandatory" },
-        { name: "Form 10B / 10BB Audit Report", due: "30th September annually", status: "Statutory" },
-        { name: "12A & 80G Renewal / Compliance", due: "Periodic regulatory cycle", status: "Tax Exemption" },
-        { name: "NITI Aayog Darpan Updates", due: "Annual project renewal", status: "Funding" },
+        { name: "ITR-7 (Exempt Entities)", due: "31st October annually" },
+        { name: "Form 10B / 10BB Audit Report", due: "30th September annually" },
+        { name: "12A & 80G Renewal / Compliance", due: "Periodic regulatory cycle" },
+        { name: "NITI Aayog Darpan Updates", due: "Annual project renewal" },
       ],
     },
   };
@@ -212,28 +203,27 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Top Advisory Bar */}
-      <aside aria-label="Quick contact" className="bg-brand-950 text-sage-200 text-xs py-2 px-4 border-b border-brand-900">
+      <aside aria-label="Quick contact" className="bg-brand-950 text-sage-200 text-xs py-2.5 px-4 border-b border-brand-900">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>ASAD Accounting & Tax Solution • Pakur, Jharkhand</span>
             <span className="hidden md:inline text-sage-400">|</span>
-            <span className="hidden md:inline text-sage-300">Proprietor: Md Asad Ansari (CMA Finalist)</span>
+            <span className="hidden md:inline text-sage-300">Md Asad Ansari (CMA Finalist)</span>
           </div>
           <div className="flex items-center gap-4">
             <a
               href="tel:+918797124734"
-              className="hover:text-white flex items-center gap-1 transition-colors"
+              className="hover:text-white flex items-center gap-1.5 transition-colors"
             >
-              <HugeiconsIcon icon={Call02Icon} size={13} />
+              <HugeiconsIcon icon={Call02Icon} size={14} />
               <span>+91 8797124734</span>
             </a>
             <span className="text-brand-800">•</span>
             <a
               href="mailto:taxexpertthe@gmail.com"
-              className="hover:text-white flex items-center gap-1 transition-colors"
+              className="hover:text-white flex items-center gap-1.5 transition-colors"
             >
-              <HugeiconsIcon icon={Mail01Icon} size={13} />
+              <HugeiconsIcon icon={Mail01Icon} size={14} />
               <span>taxexpertthe@gmail.com</span>
             </a>
           </div>
@@ -279,14 +269,14 @@ export default function Home() {
               className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-brand-800 px-3 py-2 rounded-xl transition-colors"
             >
               <HugeiconsIcon icon={Calendar01Icon} size={18} strokeWidth={2} />
-              <span className="hidden sm:inline">Book a Consultation</span>
+              <span className="hidden sm:inline">Book Consultation</span>
             </button>
 
             <a
               href="https://wa.me/918797124734"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-900 hover:bg-brand-800 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors shadow-xs inline-flex items-center gap-2"
+              className="bg-brand-900 hover:bg-brand-800 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-colors shadow-xs inline-flex items-center gap-2"
             >
               <span>Get Started</span>
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} strokeWidth={2} />
@@ -296,36 +286,10 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-12 pb-20 px-4 sm:px-6">
-        {/* Subtle decorative background gradient wave */}
-        <div className="absolute inset-0 pointer-events-none opacity-40">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 1440 600"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 200C320 280 420 120 720 180C1020 240 1200 130 1440 220V600H0V200Z"
-              fill="url(#sage-grad)"
-            />
-            <defs>
-              <linearGradient id="sage-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#EDF4E9" />
-                <stop offset="100%" stopColor="#F8F9F6" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
+      <section className="relative overflow-hidden pt-16 pb-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-sage-100 text-brand-900 border border-sage-200">
-              <HugeiconsIcon icon={CheckmarkCircle01Icon} size={16} strokeWidth={2.5} className="text-brand-800" />
-              <span>Accounting, Taxation & Business Compliance</span>
-            </div>
-
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.12]">
               Empowering Your Business with Financial Clarity & Total Compliance.
             </h1>
@@ -336,27 +300,24 @@ export default function Home() {
 
             {/* Button Styles from Style Guide */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-              {/* Primary button */}
               <a
                 href="#services"
-                className="bg-brand-900 hover:bg-brand-800 text-white font-medium px-6 py-3.5 rounded-full transition-colors shadow-sm inline-flex items-center gap-2"
+                className="bg-brand-900 hover:bg-brand-800 text-white font-medium px-6 py-3.5 rounded-xl transition-colors shadow-sm inline-flex items-center gap-2"
               >
                 <span>Get Started</span>
                 <HugeiconsIcon icon={ArrowRight01Icon} size={18} strokeWidth={2} />
               </a>
 
-              {/* Outline button */}
               <a
                 href="#services"
-                className="border border-brand-900 text-brand-900 hover:bg-sage-100 font-medium px-6 py-3.5 rounded-full transition-colors inline-flex items-center gap-2"
+                className="border border-brand-900 text-brand-900 hover:bg-sage-100 font-medium px-6 py-3.5 rounded-xl transition-colors inline-flex items-center gap-2"
               >
                 <span>Our Services</span>
               </a>
 
-              {/* Ghost / Consultation button */}
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center gap-2 text-foreground font-medium hover:text-brand-800 px-4 py-3.5 rounded-full transition-colors"
+                className="inline-flex items-center gap-2 text-foreground font-medium hover:text-brand-800 px-4 py-3.5 rounded-xl transition-colors"
               >
                 <HugeiconsIcon icon={Calendar01Icon} size={18} strokeWidth={2} />
                 <span>Book a Consultation</span>
@@ -382,138 +343,104 @@ export default function Home() {
 
           {/* Right Hero Visual / Style Guide Showcase Card */}
           <div className="lg:col-span-5">
-            <div className="relative">
-              {/* Main Illustrative Dashboard Card */}
-              <div className="bg-surface rounded-2xl p-6 border border-border shadow-lg relative z-10 space-y-6">
-                {/* Header with 7D | 30D | 90D Filter */}
-                <div className="flex items-center justify-between pb-4 border-b border-border">
-                  <div>
-                    <span className="text-xs font-semibold text-muted uppercase tracking-wider block">
-                      Compliance Overview
-                    </span>
-                    <span className="text-sm font-bold text-foreground">
-                      Financial Year 2026–27
-                    </span>
-                  </div>
+            <div className="bg-surface rounded-2xl p-6 border border-border shadow-lg space-y-6">
+              {/* Header with 7D | 30D | 90D Filter */}
+              <div className="flex items-center justify-between pb-4 border-b border-border">
+                <span className="text-sm font-bold text-foreground">
+                  Financial Year 2026–27
+                </span>
 
-                  {/* Useful UI Elements: Time Range Pills */}
-                  <div className="inline-flex p-1 bg-surface-muted rounded-full border border-border text-xs font-medium">
-                    {(["7D", "30D", "90D"] as const).map((range) => (
-                      <button
-                        key={range}
-                        onClick={() => setActiveRange(range)}
-                        className={`px-3 py-1 rounded-full transition-colors ${
-                          activeRange === range
-                            ? "bg-brand-900 text-white shadow-xs"
-                            : "text-muted hover:text-foreground"
-                        }`}
-                      >
-                        {range}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Status Badges from Style Guide */}
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sage-100 text-brand-900 border border-sage-200">
-                      <span>↑ +12.5%</span>
-                      <span className="text-muted-light font-normal text-[11px]">Accuracy</span>
-                    </span>
-                  </div>
-
-                  {/* Due in 5 days badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-sage-50 text-brand-900 border border-sage-200">
-                    <HugeiconsIcon icon={Calendar01Icon} size={14} className="text-brand-800" />
-                    <span>Due in 5 days</span>
-                  </div>
-                </div>
-
-                {/* Progress bar from Style Guide */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-muted">GST & Tax Compliance Rate</span>
-                    <span className="text-brand-900 font-bold">72%</span>
-                  </div>
-                  <div className="w-full h-2.5 bg-sage-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-brand-900 rounded-full transition-all duration-500"
-                      style={{ width: "72%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Area Graph line & fill from Style Guide (stroke-brand-700, fill-sage-200) */}
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-between text-xs text-muted">
-                    <span>Tax Efficiency Curve</span>
-                    <span className="text-success font-medium">Optimized</span>
-                  </div>
-                  <div className="w-full h-24 relative overflow-hidden rounded-xl bg-surface-muted/50 p-1">
-                    <svg
-                      viewBox="0 0 300 90"
-                      className="w-full h-full overflow-visible"
-                      preserveAspectRatio="none"
+                {/* Range Selector */}
+                <div className="inline-flex p-1 bg-surface-muted rounded-lg border border-border text-xs font-medium">
+                  {(["7D", "30D", "90D"] as const).map((range) => (
+                    <button
+                      key={range}
+                      onClick={() => setActiveRange(range)}
+                      className={`px-3 py-1 rounded-md transition-colors ${
+                        activeRange === range
+                          ? "bg-brand-900 text-white"
+                          : "text-muted hover:text-foreground"
+                      }`}
                     >
-                      <defs>
-                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#C5D9C2" stopOpacity="0.8" />
-                          <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.1" />
-                        </linearGradient>
-                      </defs>
-                      {/* Area Fill: fill-sage-200 */}
-                      <path
-                        d="M0 70 C 40 60, 70 68, 110 40 C 150 15, 190 45, 230 30 C 265 15, 285 20, 300 12 L 300 90 L 0 90 Z"
-                        fill="url(#chartGradient)"
-                      />
-                      {/* Line: stroke-brand-700 */}
-                      <path
-                        d="M0 70 C 40 60, 70 68, 110 40 C 150 15, 190 45, 230 30 C 265 15, 285 20, 300 12"
-                        fill="none"
-                        className="stroke-brand-700"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      />
-                      {/* End point dot */}
-                      <circle cx="300" cy="12" r="4.5" className="fill-brand-900" />
-                      <circle cx="300" cy="12" r="8" className="stroke-brand-700" strokeWidth="1.5" fill="none" opacity="0.4" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Illustrative Reminder Notice */}
-                <div className="p-3.5 rounded-xl bg-sage-100 border border-sage-200 flex items-start gap-3 text-xs text-brand-950">
-                  <HugeiconsIcon icon={Clock01Icon} size={18} className="text-brand-900 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold block">Upcoming Deadline: GSTR-3B</span>
-                    <span className="text-muted leading-tight block">
-                      Verify input tax credits (ITC) and finalize purchase reconciliations before the 20th.
-                    </span>
-                  </div>
+                      {range}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Background Accent Card Offset (Style Guide Accent Card with sage gradient) */}
-              <div className="absolute -bottom-4 -right-4 w-full h-full bg-sage-200 rounded-2xl -z-10 opacity-70 transform rotate-1"></div>
+              {/* Progress bar from Style Guide */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-semibold">
+                  <span className="text-muted">GST & Tax Compliance Rate</span>
+                  <span className="text-brand-900 font-bold">72%</span>
+                </div>
+                <div className="w-full h-2.5 bg-sage-100 rounded-lg overflow-hidden">
+                  <div
+                    className="h-full bg-brand-900 rounded-lg transition-all duration-500"
+                    style={{ width: "72%" }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Area Graph line & fill from Style Guide */}
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center justify-between text-xs text-muted">
+                  <span>Tax Efficiency Curve</span>
+                  <span className="text-success font-medium">Optimized</span>
+                </div>
+                <div className="w-full h-24 relative overflow-hidden rounded-xl bg-surface-muted/50 p-1">
+                  <svg
+                    viewBox="0 0 300 90"
+                    className="w-full h-full overflow-visible"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#C5D9C2" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.1" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M0 70 C 40 60, 70 68, 110 40 C 150 15, 190 45, 230 30 C 265 15, 285 20, 300 12 L 300 90 L 0 90 Z"
+                      fill="url(#chartGradient)"
+                    />
+                    <path
+                      d="M0 70 C 40 60, 70 68, 110 40 C 150 15, 190 45, 230 30 C 265 15, 285 20, 300 12"
+                      fill="none"
+                      className="stroke-brand-700"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="300" cy="12" r="4.5" className="fill-brand-900" />
+                    <circle cx="300" cy="12" r="8" className="stroke-brand-700" strokeWidth="1.5" fill="none" opacity="0.4" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Reminder Notice */}
+              <div className="p-4 rounded-xl bg-sage-100 border border-sage-200 flex items-start gap-3 text-xs text-brand-950">
+                <HugeiconsIcon icon={Clock01Icon} size={18} className="text-brand-900 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold block">Upcoming Deadline: GSTR-3B</span>
+                  <span className="text-muted leading-tight block mt-0.5">
+                    Verify input tax credits (ITC) and finalize purchase reconciliations before the 20th.
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STYLE GUIDE ICONS SHOWCASE STRIP */}
-      <section className="py-10 bg-surface border-y border-border">
+      {/* DOMAIN ICONS SHOWCASE STRIP */}
+      <section className="py-12 bg-surface border-y border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-md mx-auto mb-8">
-            <span className="text-xs font-bold text-muted uppercase tracking-wider block">
-              Comprehensive Domain Capabilities
-            </span>
-            <p className="text-sm text-foreground font-semibold mt-1">
+            <h2 className="text-lg font-bold text-foreground">
               End-to-End Accounting, Tax & Corporate Solutions
-            </p>
+            </h2>
           </div>
 
-          {/* 6 Icons matching the Style Guide Board exactly */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
               { label: "Taxation & GST", icon: Invoice01Icon, desc: "Returns & Filing" },
@@ -527,7 +454,7 @@ export default function Home() {
                 key={idx}
                 className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-surface-muted transition-colors group cursor-default"
               >
-                <div className="w-14 h-14 rounded-2xl bg-sage-100 border border-sage-200 text-brand-900 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform group-hover:bg-brand-900 group-hover:text-white">
+                <div className="w-14 h-14 rounded-2xl bg-sage-100 border border-sage-200 text-brand-900 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform group-hover:bg-brand-900 group-hover:text-white">
                   <HugeiconsIcon icon={item.icon} size={26} strokeWidth={1.8} />
                 </div>
                 <span className="text-sm font-semibold text-foreground block">
@@ -545,10 +472,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Header & Filter Tabs */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sage-100 text-brand-900">
-                <span>Services Catalog</span>
-              </div>
+            <div className="space-y-2">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
                 Specialized Services for Every Business Stage
               </h2>
@@ -557,7 +481,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Category Filter Pills */}
+            {/* Category Filter Tabs */}
             <div className="flex flex-wrap gap-2">
               {[
                 { id: "all", label: "All Services" },
@@ -570,7 +494,7 @@ export default function Home() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                     selectedCategory === tab.id
                       ? "bg-brand-900 text-white shadow-xs"
                       : "bg-surface border border-border text-muted hover:text-foreground hover:border-sage-300"
@@ -582,7 +506,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Service Cards Grid (Matching Card Styles from Style Guide) */}
+          {/* Service Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredServices.map((service) => {
               const isHighlight = service.highlight;
@@ -591,35 +515,19 @@ export default function Home() {
                   key={service.title}
                   className={`rounded-2xl p-7 flex flex-col justify-between transition-all duration-200 border ${
                     isHighlight
-                      ? "bg-sage-100 border-sage-300 shadow-md relative overflow-hidden"
+                      ? "bg-sage-100 border-sage-300 shadow-md"
                       : "bg-surface border-border hover:shadow-lg hover:border-sage-400"
                   }`}
                 >
-                  {/* Subtle top decoration for highlighted cards */}
-                  {isHighlight && (
-                    <div className="absolute top-0 right-0 -mr-8 -mt-8 w-28 h-28 rounded-full bg-sage-200/60 pointer-events-none"></div>
-                  )}
-
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                          isHighlight
-                            ? "bg-brand-900 text-white"
-                            : "bg-sage-100 text-brand-900"
-                        }`}
-                      >
-                        <HugeiconsIcon icon={service.icon} size={24} strokeWidth={2} />
-                      </div>
-                      <span
-                        className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                          isHighlight
-                            ? "bg-white text-brand-900"
-                            : "bg-surface-muted text-muted"
-                        }`}
-                      >
-                        {service.badge}
-                      </span>
+                    <div
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                        isHighlight
+                          ? "bg-brand-900 text-white"
+                          : "bg-sage-100 text-brand-900"
+                      }`}
+                    >
+                      <HugeiconsIcon icon={service.icon} size={24} strokeWidth={2} />
                     </div>
 
                     <div>
@@ -673,10 +581,6 @@ export default function Home() {
       <section id="compliance" className="py-20 bg-surface border-y border-border px-4 sm:px-6">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sage-100 text-brand-900">
-              <HugeiconsIcon icon={Clock01Icon} size={15} />
-              <span>Statutory Compliance Matrix</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
               Know Your Key Filing Deadlines
             </h2>
@@ -696,7 +600,7 @@ export default function Home() {
               <button
                 key={entity.id}
                 onClick={() => setSelectedEntity(entity.id)}
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all ${
+                className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                   selectedEntity === entity.id
                     ? "bg-brand-900 text-white shadow-xs"
                     : "bg-background border border-border text-muted hover:text-foreground"
@@ -711,18 +615,12 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-background rounded-2xl p-6 sm:p-8 border border-border space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border">
-                <div>
-                  <span className="text-xs font-semibold text-muted uppercase tracking-wider block">
-                    Entity Profile
-                  </span>
-                  <h3 className="text-lg font-bold text-foreground">
-                    {entityDeadlines[selectedEntity]?.title}
-                  </h3>
-                </div>
-                <div className="inline-flex items-center gap-2 text-xs font-medium text-brand-900 bg-sage-100 px-3 py-1.5 rounded-full">
-                  <HugeiconsIcon icon={Shield01Icon} size={16} />
-                  <span>Mandatory Statutory Compliance</span>
-                </div>
+                <h3 className="text-lg font-bold text-foreground">
+                  {entityDeadlines[selectedEntity]?.title}
+                </h3>
+                <span className="text-xs text-muted">
+                  Statutory Compliance Schedule
+                </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -740,9 +638,6 @@ export default function Home() {
                         {filing.due}
                       </span>
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sage-50 text-brand-900 border border-sage-200 shrink-0">
-                      {filing.status}
-                    </span>
                   </div>
                 ))}
               </div>
@@ -767,9 +662,6 @@ export default function Home() {
       <section id="about" className="py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sage-100 text-brand-900">
-              <span>About the Firm</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
               Local Commitment, Professional Precision.
             </h2>
@@ -802,26 +694,26 @@ export default function Home() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                  <span className="text-xs font-bold text-brand-900 uppercase tracking-wider block">
-                    Bus Stand Location
+                  <span className="text-sm font-bold text-foreground block">
+                    Bus Stand Office
                   </span>
                   <p className="text-xs text-muted leading-relaxed">
                     Shop No. 14, Bus Stand, Pakur, Jharkhand – 816107
                   </p>
                   <span className="inline-block text-[11px] text-muted-light">
-                    As listed on business card
+                    Business card location
                   </span>
                 </div>
 
                 <div className="p-4 rounded-xl bg-background border border-border space-y-2">
-                  <span className="text-xs font-bold text-brand-900 uppercase tracking-wider block">
-                    Harindanga Bazar Location
+                  <span className="text-sm font-bold text-foreground block">
+                    Harindanga Bazar Office
                   </span>
                   <p className="text-xs text-muted leading-relaxed">
                     Harindanga Bazar, Pakur, Jharkhand – 816107
                   </p>
                   <span className="inline-block text-[11px] text-muted-light">
-                    Alternative office / service point
+                    Service point location
                   </span>
                 </div>
               </div>
@@ -829,7 +721,7 @@ export default function Home() {
               <div className="p-4 rounded-xl bg-sage-50 border border-sage-200 text-xs text-brand-950 flex items-start gap-3">
                 <HugeiconsIcon icon={CheckmarkCircle01Icon} size={18} className="text-brand-900 shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
-                  <strong>Location Note:</strong> For appointments and document drop-off, please call in advance to confirm current office desk availability.
+                  For appointments and document drop-off, please call in advance to confirm current office desk availability.
                 </p>
               </div>
             </div>
@@ -843,11 +735,6 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Contact Details */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sage-100 text-brand-900">
-                <HugeiconsIcon icon={Call02Icon} size={14} />
-                <span>Get in Touch</span>
-              </div>
-
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
                 Speak with Our Tax & Compliance Team.
               </h2>
@@ -906,7 +793,7 @@ export default function Home() {
                   href="https://wa.me/918797124734"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full bg-brand-900 hover:bg-brand-800 text-white font-medium px-6 py-3.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 text-sm shadow-sm"
+                  className="w-full bg-brand-900 hover:bg-brand-800 text-white font-medium px-6 py-3.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2 text-sm shadow-sm"
                 >
                   <span>Chat on WhatsApp</span>
                   <HugeiconsIcon icon={ArrowUpRight01Icon} size={16} />
@@ -943,74 +830,58 @@ export default function Home() {
                 ) : (
                   <form onSubmit={handleConsultationSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-foreground">
-                          Full Name
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Your name"
-                          className="w-full px-4 py-2.5 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-foreground">
-                          Phone Number
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="+91 9876543210"
-                          className="w-full px-4 py-2.5 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        required
+                        aria-label="Full Name"
+                        placeholder="Full Name"
+                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        aria-label="Phone Number"
+                        placeholder="Phone Number (+91)"
+                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-foreground">
-                          Service Needed
-                        </label>
-                        <select className="w-full px-4 py-2.5 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700">
-                          <option>GST Registration / Return Filing</option>
-                          <option>Income Tax Return (ITR)</option>
-                          <option>Accounting & Bookkeeping</option>
-                          <option>Company / LLP Incorporation</option>
-                          <option>NGO / Trust 12A & 80G</option>
-                          <option>MSME / FSSAI License</option>
-                          <option>Other Legal Compliance</option>
-                        </select>
-                      </div>
+                      <select
+                        aria-label="Service Needed"
+                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
+                      >
+                        <option>GST Registration / Return Filing</option>
+                        <option>Income Tax Return (ITR)</option>
+                        <option>Accounting & Bookkeeping</option>
+                        <option>Company / LLP Incorporation</option>
+                        <option>NGO / Trust 12A & 80G</option>
+                        <option>MSME / FSSAI License</option>
+                        <option>Other Legal Compliance</option>
+                      </select>
 
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-foreground">
-                          Business Entity
-                        </label>
-                        <select className="w-full px-4 py-2.5 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700">
-                          <option>Individual / Salaried</option>
-                          <option>Sole Proprietorship</option>
-                          <option>Partnership Firm / LLP</option>
-                          <option>Private Limited Company</option>
-                          <option>NGO / Trust / Society</option>
-                        </select>
-                      </div>
+                      <select
+                        aria-label="Business Entity"
+                        className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700"
+                      >
+                        <option>Individual / Salaried</option>
+                        <option>Sole Proprietorship</option>
+                        <option>Partnership Firm / LLP</option>
+                        <option>Private Limited Company</option>
+                        <option>NGO / Trust / Society</option>
+                      </select>
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="text-xs font-semibold text-foreground">
-                        Message / Query Details
-                      </label>
-                      <textarea
-                        rows={3}
-                        placeholder="Tell us about your requirement or deadlines..."
-                        className="w-full px-4 py-2.5 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700 resize-none"
-                      ></textarea>
-                    </div>
+                    <textarea
+                      rows={3}
+                      aria-label="Message or Query Details"
+                      placeholder="Tell us about your requirement or deadlines..."
+                      className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-sm focus:outline-none focus:border-brand-700 resize-none"
+                    ></textarea>
 
                     <button
                       type="submit"
-                      className="w-full bg-brand-900 hover:bg-brand-800 text-white font-medium py-3 rounded-full transition-colors text-sm shadow-xs flex items-center justify-center gap-2"
+                      className="w-full bg-brand-900 hover:bg-brand-800 text-white font-medium py-3.5 rounded-xl transition-colors text-sm shadow-xs flex items-center justify-center gap-2"
                     >
                       <span>Send Consultation Request</span>
                       <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
@@ -1044,7 +915,7 @@ export default function Home() {
                 Services
               </a>
               <a href="#compliance" className="hover:text-white transition-colors">
-                Compliance Matrix
+                Compliance Timeline
               </a>
               <a href="#about" className="hover:text-white transition-colors">
                 About Firm
@@ -1058,7 +929,7 @@ export default function Home() {
           {/* Legal Disclaimer as advised in info.md */}
           <div className="text-[11px] text-sage-400/80 leading-relaxed max-w-4xl">
             <p>
-              <strong>Disclaimer:</strong> Service descriptions, categories, and regulatory dates on this website are organized for informational guidance. Exact engagement scope, statutory eligibility, pricing, and document requirements are confirmed directly with the proprietor, Md Asad Ansari (CMA Finalist), upon consultation.
+              Disclaimer: Service descriptions, categories, and regulatory dates on this website are organized for informational guidance. Exact engagement scope, statutory eligibility, pricing, and document requirements are confirmed directly with the proprietor, Md Asad Ansari (CMA Finalist), upon consultation.
             </p>
           </div>
 
@@ -1085,9 +956,6 @@ export default function Home() {
             </button>
 
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-brand-900 bg-sage-100 px-3 py-1 rounded-full inline-block">
-                Direct Appointment
-              </span>
               <h3 className="text-xl font-bold text-foreground">
                 Schedule a Consultation
               </h3>
@@ -1112,55 +980,45 @@ export default function Home() {
               </div>
             ) : (
               <form onSubmit={handleConsultationSubmit} className="space-y-4">
-                <div>
-                  <label className="text-xs font-semibold text-foreground block mb-1">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
-                  />
-                </div>
+                <input
+                  type="text"
+                  required
+                  aria-label="Your Name"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
+                />
 
-                <div>
-                  <label className="text-xs font-semibold text-foreground block mb-1">
-                    Phone / WhatsApp Number
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 8797124734"
-                    className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
-                  />
-                </div>
+                <input
+                  type="tel"
+                  required
+                  aria-label="Phone or WhatsApp Number"
+                  placeholder="Phone / WhatsApp (+91)"
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
+                />
 
-                <div>
-                  <label className="text-xs font-semibold text-foreground block mb-1">
-                    Service Required
-                  </label>
-                  <select className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700">
-                    <option>GST Return Filing & Reconciliations</option>
-                    <option>Income Tax Return (ITR)</option>
-                    <option>Company / Firm Registration</option>
-                    <option>Accounting & Balance Sheet</option>
-                    <option>MSME / FSSAI / Digital Signature</option>
-                    <option>Other Compliance</option>
-                  </select>
-                </div>
+                <select
+                  aria-label="Service Required"
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
+                >
+                  <option>GST Return Filing & Reconciliations</option>
+                  <option>Income Tax Return (ITR)</option>
+                  <option>Company / Firm Registration</option>
+                  <option>Accounting & Balance Sheet</option>
+                  <option>MSME / FSSAI / Digital Signature</option>
+                  <option>Other Compliance</option>
+                </select>
 
                 <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-2.5 rounded-full border border-border text-xs font-semibold text-muted hover:text-foreground"
+                    className="flex-1 py-3 rounded-xl border border-border text-xs font-semibold text-muted hover:text-foreground"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 bg-brand-900 hover:bg-brand-800 text-white py-2.5 rounded-full text-xs font-semibold transition-colors"
+                    className="flex-1 bg-brand-900 hover:bg-brand-800 text-white py-3 rounded-xl text-xs font-semibold transition-colors"
                   >
                     Confirm Callback
                   </button>
