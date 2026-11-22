@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --background: #F8F9F6;
+  --surface: #FFFFFF;
+  --surface-muted: #F1F3EF;
+  --border: #E5EAE3;
+  --foreground: #242927;
+  --muted: #69736C;
+  --muted-light: #929B94;
+}
+
 @theme {
   /* Primary — Forest Green */
   --color-brand-950: #102D20;
@@ -37,8 +47,8 @@
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: #F8F9F6;
+  color: #242927;
   font-family: var(--font-sans);
   min-height: 100vh;
 }

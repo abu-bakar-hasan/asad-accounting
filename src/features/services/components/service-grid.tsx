@@ -23,6 +23,8 @@ export function ServiceGrid({
       {/* Category Filter Tabs */}
       <div className="flex flex-wrap gap-2">
         <button
+          type="button"
+          suppressHydrationWarning
           onClick={() => setActiveCategory("all")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
             activeCategory === "all"
@@ -36,6 +38,8 @@ export function ServiceGrid({
         {categories.map((cat) => (
           <button
             key={cat.id}
+            type="button"
+            suppressHydrationWarning
             onClick={() => setActiveCategory(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeCategory === cat.id

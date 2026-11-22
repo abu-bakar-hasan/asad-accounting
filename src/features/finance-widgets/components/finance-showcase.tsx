@@ -20,6 +20,8 @@ export function FinanceShowcase() {
           {(["7D", "30D", "90D"] as const).map((range) => (
             <button
               key={range}
+              type="button"
+              suppressHydrationWarning
               onClick={() => setActiveRange(range)}
               className={`px-3 py-1 rounded-md transition-colors ${
                 activeRange === range

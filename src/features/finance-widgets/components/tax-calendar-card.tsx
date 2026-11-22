@@ -21,6 +21,8 @@ export function TaxCalendarCard() {
         ].map((entity) => (
           <button
             key={entity.id}
+            type="button"
+            suppressHydrationWarning
             onClick={() => setSelectedEntity(entity.id)}
             className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               selectedEntity === entity.id

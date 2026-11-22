@@ -113,6 +113,7 @@ export function ContactSection() {
                   <input
                     type="text"
                     required
+                    suppressHydrationWarning
                     aria-label="Full Name"
                     placeholder="Full Name"
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
@@ -120,6 +121,7 @@ export function ContactSection() {
                   <input
                     type="tel"
                     required
+                    suppressHydrationWarning
                     aria-label="Phone Number"
                     placeholder="Phone Number (+91)"
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
@@ -128,6 +130,7 @@ export function ContactSection() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <select
+                    suppressHydrationWarning
                     aria-label="Service Needed"
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
                   >
@@ -141,6 +144,7 @@ export function ContactSection() {
                   </select>
 
                   <select
+                    suppressHydrationWarning
                     aria-label="Business Entity"
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700"
                   >
@@ -154,6 +158,7 @@ export function ContactSection() {
 
                 <textarea
                   rows={3}
+                  suppressHydrationWarning
                   aria-label="Message or Query Details"
                   placeholder="Tell us about your requirement or deadlines..."
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:border-brand-700 resize-none"
@@ -161,6 +166,7 @@ export function ContactSection() {
 
                 <button
                   type="submit"
+                  suppressHydrationWarning
                   className="w-full bg-brand-900 hover:bg-brand-800 text-white font-medium py-3.5 rounded-xl transition-colors text-sm shadow-xs flex items-center justify-center gap-2"
                 >
                   <span>Send Consultation Request</span>
