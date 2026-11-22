@@ -2,83 +2,66 @@ import React from "react";
 
 export function RegistrationShapes() {
   return (
-    <div className="relative flex items-end justify-end select-none pointer-events-none w-28 h-24 sm:w-32 sm:h-28 shrink-0">
+    <div className="relative flex items-end justify-end select-none pointer-events-none w-24 h-20 sm:w-28 sm:h-24 shrink-0">
       <svg
-        viewBox="0 0 130 110"
+        viewBox="0 0 120 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-105"
         aria-hidden="true"
       >
         <defs>
-          <linearGradient id="reg-shape-grad-1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#C5D9C2" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.3" />
+          <linearGradient id="bento-reg-light" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#C5D9C2" />
+            <stop offset="100%" stopColor="#EDF4E9" />
           </linearGradient>
-
-          <linearGradient id="reg-shape-grad-2" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="bento-reg-sage" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#829A86" />
-            <stop offset="100%" stopColor="#A5BCA5" stopOpacity="0.7" />
-          </linearGradient>
-
-          <linearGradient id="reg-shape-grad-3" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#287A45" />
-            <stop offset="100%" stopColor="#1D6038" />
-          </linearGradient>
-
-          <linearGradient id="reg-shape-grad-4" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#17452D" />
-            <stop offset="100%" stopColor="#102D20" />
+            <stop offset="100%" stopColor="#A5BCA5" />
           </linearGradient>
         </defs>
 
-        {/* Pillar 1 (back, tallest, light sage translucent) */}
+        {/* Pillar 1 (Left): Forest Green, medium height */}
         <rect
-          x="66"
-          y="10"
-          width="26"
-          height="88"
-          rx="10"
-          fill="url(#reg-shape-grad-1)"
-          className="transition-transform duration-500 group-hover:-translate-y-1"
+          x="14"
+          y="52"
+          width="18"
+          height="40"
+          rx="7"
+          fill="#17452D"
         />
 
-        {/* Pillar 2 (mid-layer, sage 500) */}
+        {/* Pillar 2 (Mid-left): Sage, taller */}
         <rect
           x="38"
-          y="28"
-          width="24"
-          height="70"
-          rx="9"
-          fill="url(#reg-shape-grad-2)"
-          opacity="0.85"
-          className="transition-transform duration-500 group-hover:-translate-y-0.5"
+          y="32"
+          width="18"
+          height="60"
+          rx="7"
+          fill="url(#bento-reg-sage)"
         />
 
-        {/* Pillar 3 (front right, brand green) */}
+        {/* Pillar 3 (Mid-right): Light Sage, tallest, with floating dot */}
         <rect
-          x="88"
+          x="62"
+          y="18"
+          width="18"
+          height="74"
+          rx="7"
+          fill="url(#bento-reg-light)"
+        />
+        {/* Floating dot above pillar 3 */}
+        <circle cx="71" cy="10" r="2.5" fill="#829A86" />
+
+        {/* Pillar 4 (Right): Forest Green */}
+        <rect
+          x="86"
           y="42"
-          width="24"
-          height="56"
-          rx="9"
-          fill="url(#reg-shape-grad-3)"
-          opacity="0.9"
-          className="transition-transform duration-500 group-hover:-translate-y-1.5"
+          width="18"
+          height="50"
+          rx="7"
+          fill="#17452D"
         />
-
-        {/* Pillar 4 (front left anchor, deep forest green) */}
-        <rect
-          x="12"
-          y="54"
-          width="22"
-          height="44"
-          rx="8"
-          fill="url(#reg-shape-grad-4)"
-        />
-
-        {/* Subtle decorative dot accent above Pillar 1 */}
-        <circle cx="79" cy="4" r="2.5" fill="#829A86" opacity="0.6" />
       </svg>
     </div>
   );

@@ -2,74 +2,84 @@ import React from "react";
 
 export function GstGraph() {
   return (
-    <div className="w-full pt-4 overflow-hidden select-none pointer-events-none">
+    <div className="absolute inset-0 w-full h-full overflow-hidden select-none pointer-events-none">
       <svg
-        viewBox="0 0 360 170"
+        viewBox="0 0 760 240"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto overflow-visible"
+        className="w-full h-full object-cover sm:object-fill"
+        preserveAspectRatio="none"
         aria-hidden="true"
       >
         <defs>
           {/* Subtle area gradient */}
-          <linearGradient id="gst-area-grad" x1="180" y1="25" x2="180" y2="165" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A5BCA5" stopOpacity="0.32" />
-            <stop offset="45%" stopColor="#829A86" stopOpacity="0.14" />
+          <linearGradient id="gst-bento-area" x1="380" y1="10" x2="380" y2="230" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#A5BCA5" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#829A86" stopOpacity="0.12" />
             <stop offset="100%" stopColor="#102D20" stopOpacity="0.0" />
           </linearGradient>
 
           {/* Line stroke gradient */}
-          <linearGradient id="gst-line-grad" x1="10" y1="130" x2="350" y2="25" gradientUnits="userSpaceOnUse">
+          <linearGradient id="gst-bento-line" x1="20" y1="200" x2="740" y2="10" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#829A86" />
-            <stop offset="40%" stopColor="#A5BCA5" />
-            <stop offset="100%" stopColor="#DCE9D8" />
+            <stop offset="45%" stopColor="#A5BCA5" />
+            <stop offset="100%" stopColor="#EDF4E9" />
           </linearGradient>
 
-          {/* Bar gradient */}
-          <linearGradient id="gst-bar-grad" x1="0" y1="0" x2="0" y2="1">
+          {/* Vertical Bar gradient */}
+          <linearGradient id="gst-bento-bar" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#EDF4E9" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.03" />
+            <stop offset="100%" stopColor="#EDF4E9" stopOpacity="0.02" />
           </linearGradient>
         </defs>
 
-        {/* Subtle grid guidelines */}
-        <line x1="10" y1="160" x2="350" y2="160" stroke="#FFFFFF" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="3 3" />
-        <line x1="10" y1="105" x2="350" y2="105" stroke="#FFFFFF" strokeOpacity="0.06" strokeWidth="1" strokeDasharray="3 3" />
+        {/* Subtle grid guidelines across the entire 2-column block */}
+        <line x1="15" y1="210" x2="745" y2="210" stroke="#FFFFFF" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="15" y1="145" x2="745" y2="145" stroke="#FFFFFF" strokeOpacity="0.06" strokeWidth="1" strokeDasharray="4 4" />
 
-        {/* Translucent ascending vertical bars behind the graph */}
-        <rect x="25" y="125" width="18" height="35" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="62" y="112" width="18" height="48" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="99" y="100" width="18" height="60" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="136" y="86" width="18" height="74" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="173" y="74" width="18" height="86" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="210" y="66" width="18" height="94" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="247" y="52" width="18" height="108" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="284" y="38" width="18" height="122" rx="5" fill="url(#gst-bar-grad)" />
-        <rect x="321" y="22" width="18" height="138" rx="5" fill="url(#gst-bar-grad)" />
+        {/* Translucent ascending vertical bars (spaced across both GST area and the middle column) */}
+        <rect x="35" y="172" width="22" height="38" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="75" y="158" width="22" height="52" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="115" y="144" width="22" height="66" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="155" y="128" width="22" height="82" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="195" y="114" width="22" height="96" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="235" y="98" width="22" height="112" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="275" y="84" width="22" height="126" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="315" y="70" width="22" height="140" rx="6" fill="url(#gst-bento-bar)" />
 
-        {/* Area fill polygon beneath the curve */}
+        {/* Bars extending into the middle column gap */}
+        <rect x="365" y="58" width="22" height="152" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="415" y="46" width="22" height="164" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="465" y="34" width="22" height="176" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="515" y="24" width="22" height="186" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="565" y="18" width="22" height="192" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="615" y="14" width="22" height="196" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="665" y="10" width="22" height="200" rx="6" fill="url(#gst-bento-bar)" />
+        <rect x="715" y="8" width="22" height="202" rx="6" fill="url(#gst-bento-bar)" />
+
+        {/* Gradient Area Fill under the full curve */}
         <path
-          d="M 12 160 L 12 136 C 60 134, 105 120, 150 96 C 195 72, 240 82, 285 50 C 315 28, 335 24, 348 20 L 348 160 Z"
-          fill="url(#gst-area-grad)"
+          d="M 15 210 L 15 180 C 100 178, 190 156, 280 112 C 325 90, 360 76, 395 64 C 475 38, 580 18, 745 8 L 745 210 Z"
+          fill="url(#gst-bento-area)"
         />
 
-        {/* Ascending financial line curve */}
+        {/* Ascending financial line curve flowing across */}
         <path
-          d="M 12 136 C 60 134, 105 120, 150 96 C 195 72, 240 82, 285 50 C 315 28, 335 24, 348 20"
-          stroke="url(#gst-line-grad)"
-          strokeWidth="3"
+          d="M 15 180 C 100 178, 190 156, 280 112 C 325 90, 360 76, 395 64 C 475 38, 580 18, 745 8"
+          stroke="url(#gst-bento-line)"
+          strokeWidth="3.5"
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Mid-curve marker point */}
-        <circle cx="150" cy="96" r="3.5" fill="#C5D9C2" fillOpacity="0.85" />
-        <circle cx="150" cy="96" r="7" stroke="#A5BCA5" strokeOpacity="0.3" strokeWidth="1" fill="none" />
+        {/* Glowing Data Point Marker at the transition threshold (around x=345) */}
+        <circle cx="345" cy="82" r="14" fill="#DCE9D8" fillOpacity="0.15" />
+        <circle cx="345" cy="82" r="7" stroke="#A5BCA5" strokeWidth="1.5" strokeOpacity="0.5" fill="none" />
+        <circle cx="345" cy="82" r="3.5" fill="#FFFFFF" />
 
-        {/* Peak data marker with concentric glow */}
-        <circle cx="348" cy="20" r="10" fill="#DCE9D8" fillOpacity="0.2" className="animate-pulse" />
-        <circle cx="348" cy="20" r="5" fill="#DCE9D8" fillOpacity="0.5" />
-        <circle cx="348" cy="20" r="2.5" fill="#FFFFFF" />
+        {/* Terminal peak glow */}
+        <circle cx="745" cy="8" r="8" fill="#EDF4E9" fillOpacity="0.25" />
+        <circle cx="745" cy="8" r="3" fill="#FFFFFF" />
       </svg>
     </div>
   );
