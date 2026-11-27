@@ -1,0 +1,19 @@
+.calendar { min-width: 0; padding: 28px; border-radius: 24px; background: #fff; }
+.calendar :global(.rdp-root) { --rdp-accent-color: #17452d; --rdp-accent-background-color: #edf4e9; --rdp-day-height: 54px; --rdp-day-width: 54px; --rdp-day_button-height: 42px; --rdp-day_button-width: 42px; --rdp-selected-border: 0; --rdp-today-color: #287a45; width: 100%; }
+.calendar :global(.rdp-months), .calendar :global(.rdp-month) { width: 100%; max-width: none; }
+.calendar :global(.rdp-month_grid) { width: 100%; table-layout: fixed; }
+.calendar :global(.rdp-month_caption) { height: 48px; margin-bottom: 16px; }
+.calendar :global(.rdp-caption_label) { font-size: 20px; font-weight: 600; letter-spacing: -.03em; }
+.calendar :global(.rdp-weekday) { font-size: 12px; font-weight: 500; color: #69736c; opacity: 1; padding-bottom: 14px; }
+.calendar :global(.rdp-day_button) { margin: auto; font-size: 14px; border-radius: 50%; }
+.calendar :global(.rdp-selected) { font-size: inherit; }
+.calendar :global(.rdp-selected .rdp-day_button) { background: #17452d; color: white; font-weight: 600; }
+.calendar :global(.rdp-day_button:focus-visible) { outline: 2px solid #287a45; outline-offset: 3px; }
+.calendar :global(.rdp-day_button:hover) { background: #edf4e9; color: #17452d; }
+.calendar :global(.rdp-selected .rdp-day_button:hover) { background: #17452d; color: white; }
+.deadline { position: relative; }
+.deadline::after { content: ""; position: absolute; bottom: 3px; left: calc(50% - 2px); width: 4px; height: 4px; border-radius: 50%; background: #287a45; pointer-events: none; }
+@media (max-width: 639px) {
+  .calendar { padding: 20px 12px; border-radius: 18px; }
+  .calendar :global(.rdp-root) { --rdp-day-height: 48px; --rdp-day-width: 38px; --rdp-day_button-height: 36px; --rdp-day_button-width: 36px; }
+}

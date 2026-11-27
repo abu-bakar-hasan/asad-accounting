@@ -1,71 +1,50 @@
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Message01Icon, File01Icon, CheckmarkCircle01Icon, SentIcon } from "@hugeicons/core-free-icons";
 import { Container } from "@/components/layout/container";
-import { SectionHeading } from "@/components/shared/section-heading";
+
 import { TaxCalendarCard } from "@/features/finance-widgets/components/tax-calendar-card";
+import styles from "./process-section.module.css";
+
+const steps = [
+  { step: "01", title: "Let's understand your business", description: "Share what you need. We review your documents and explain the next steps.", icon: Message01Icon },
+  { step: "02", title: "We prepare the details", description: "Your accounts, calculations and documents, checked and prepared for filing.", icon: File01Icon },
+  { step: "03", title: "You review. You approve.", description: "We walk you through the details. Nothing is submitted without your approval.", icon: CheckmarkCircle01Icon },
+  { step: "04", title: "Filed. Confirmed. Delivered.", description: "We submit your filing and share the acknowledgement or certificate with you.", icon: SentIcon },
+];
 
 export function ProcessSection() {
-  const steps = [
-    {
-      step: "01",
-      title: "Consultation & Document Review",
-      description: "Discuss your specific requirements and submit necessary KYC, invoices, or business details.",
-    },
-    {
-      step: "02",
-      title: "Preparation & Reconciliation",
-      description: "We compute tax liabilities, reconcile purchases with GSTR-2B/AIS, and draft statutory filings.",
-    },
-    {
-      step: "03",
-      title: "Client Approval & Verification",
-      description: "Review computations and approve draft returns before final government portal submission.",
-    },
-    {
-      step: "04",
-      title: "Filing & Acknowledgement",
-      description: "Timely e-filing with immediate dispatch of official ITR-V, GSTR acknowledgement, or registration certificates.",
-    },
-  ];
-
   return (
-    <section className="py-20 bg-background">
-      <Container className="space-y-16">
-        <div className="space-y-10">
-          <SectionHeading
-            align="center"
-            title="How We Work With You"
-            description="A clear, structured engagement process to ensure total accuracy and zero compliance lapses."
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((item) => (
-              <div
-                key={item.step}
-                className="p-6 rounded-2xl bg-surface border border-border space-y-3"
-              >
-                <span className="text-2xl font-bold text-brand-900 block font-mono">
-                  {item.step}
-                </span>
-                <h3 className="text-base font-bold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-muted leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+    <section aria-labelledby="process-heading" className="bg-background py-16 sm:py-24">
+      <Container>
+        <div className="rounded-[28px] bg-surface px-4 py-12 sm:rounded-[40px] sm:px-10 sm:py-20 lg:px-16">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 id="process-heading" className="text-4xl font-semibold tracking-[-0.045em] text-foreground sm:text-5xl">How we work</h2>
+            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">From the first conversation to the final filing.<br className="hidden sm:block" /> A clear process, with you at every step.</p>
           </div>
+
+          <ol className={styles.timeline}>
+            {steps.map((item, index) => (
+              <li key={item.step} className={`${styles.step} ${index === 0 ? styles.highlight : ""}`}>
+                <div className={styles.visual} aria-hidden="true">
+                  <div className={styles.icon}><HugeiconsIcon icon={item.icon} size={28} strokeWidth={1.5} /></div>
+                  <span className={styles.number}>{item.step}</span>
+                </div>
+                <span className={styles.node} aria-hidden="true" />
+                <div className={styles.copy}>
+                  <h3 className="text-lg font-semibold leading-snug tracking-tight text-foreground sm:text-xl">{item.title}</h3>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">{item.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        {/* Integrated Statutory Deadlines */}
-        <div className="space-y-8 pt-8 border-t border-border">
-          <SectionHeading
-            align="center"
-            title="Know Your Key Filing Deadlines"
-            description="Select your business type below to check mandatory regulatory filing requirements and prevent interest or late fees."
-          />
+        <div className="mt-16 space-y-8 sm:mt-24">
+
           <TaxCalendarCard />
         </div>
       </Container>
     </section>
   );
 }
+
